@@ -9,7 +9,7 @@ public:
 
 public:
 	wxTextCtrl *mtxtCnt = nullptr;
-	wxGridSizer* numgrid = nullptr;
+	wxPanel* mPanel = nullptr;
 
 	void onbttnclicked(wxCommandEvent &evt);
 	wxDECLARE_EVENT_TABLE();

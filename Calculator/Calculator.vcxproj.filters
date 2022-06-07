@@ -21,12 +21,18 @@
     <ClInclude Include="CalcForm.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CalcPanel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Calculator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CalcForm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -144,10 +144,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CalcForm.h" />
+    <ClInclude Include="CalcPanel.h" />
     <ClInclude Include="Calculator.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CalcForm.cpp" />
+    <ClCompile Include="CalcPanel.cpp" />
     <ClCompile Include="Calculator.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
