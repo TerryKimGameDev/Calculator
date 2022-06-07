@@ -143,11 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CalcButton.h" />
     <ClInclude Include="CalcForm.h" />
     <ClInclude Include="CalcPanel.h" />
     <ClInclude Include="Calculator.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CalcButton.cpp" />
     <ClCompile Include="CalcForm.cpp" />
     <ClCompile Include="CalcPanel.cpp" />
     <ClCompile Include="Calculator.cpp" />

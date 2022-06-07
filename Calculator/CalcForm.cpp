@@ -6,7 +6,6 @@ wxEND_EVENT_TABLE()
 
 using namespace std;
 CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), wxSize(300, 400)) {
-	
 	wxFont font(24, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
@@ -19,7 +18,7 @@ CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), w
 	CalcPanel* cal = new CalcPanel(this);
 	boxsizer->Add(cal, 1 ,wxEXPAND);
 	SetSizer(boxsizer);
-
+	
 }
 
 CalcForm::~CalcForm() {

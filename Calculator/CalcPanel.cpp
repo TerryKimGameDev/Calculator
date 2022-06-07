@@ -1,4 +1,5 @@
 #include "CalcPanel.h"
+#include "CalcButton.h"
 
 wxBEGIN_EVENT_TABLE(CalcPanel, wxPanel)
 EVT_BUTTON(10001, onbttnclicked)
@@ -7,17 +8,16 @@ wxEND_EVENT_TABLE()
 using namespace std;
 CalcPanel::CalcPanel(wxWindow *parent): wxPanel(parent) {
 
-	wxFont font(20, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+	wxFont font(20, wxFONTFAMILY_MODERN, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 	this->SetFont(font);
-	//mPanel = new wxPanel(this, wxID_ANY, wxPoint(40, 100), wxSize(200,200));
-	//mPanel->SetFont(font);
+	this->SetBackgroundColour(wxColor(235, 235, 222));
 
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
 
 	numgrid = new wxGridSizer(6, 4, 5, 5);
 
-
-	numgrid->Add(new wxButton(this, 30, "Bin"), 0, wxEXPAND);
+	//numgrid->Add(new wxButton(this, 30, "Bin"), 0, wxEXPAND);
+	numgrid->Add(new CalcButton(this, 30, "Bin"), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 31, "Hex"), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 32, "Dec"), 0, wxEXPAND);
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
@@ -41,7 +41,6 @@ CalcPanel::CalcPanel(wxWindow *parent): wxPanel(parent) {
 	numgrid->Add(new wxButton(this, 2, "2"), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 3, "3"), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 0, "0"), 0, wxEXPAND);
-
 
 
 	boxsizer->Add(numgrid, 1, wxEXPAND);
