@@ -8,9 +8,7 @@ public:
 	~CalcForm();
 
 public:
-	wxButton** mNumBttn;
 	wxTextCtrl *mtxtCnt = nullptr;
-	wxPanel* panel = nullptr;
 	wxGridSizer* numgrid = nullptr;
 
 	void onbttnclicked(wxCommandEvent &evt);
