@@ -6,6 +6,13 @@ wxEND_EVENT_TABLE()
 
 using namespace std;
 CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), wxSize(300, 400)) {
+
+	wxPNGHandler* handler = new wxPNGHandler;
+	wxImage::AddHandler(handler);
+	wxStaticBitmap* image;
+	image = new wxStaticBitmap(this, wxID_ANY, wxBitmap("Calc.PNG", wxBITMAP_TYPE_PNG), wxPoint(0, 0), wxSize(0, 0));
+
+
 	wxFont font(24, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
 
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
@@ -17,6 +24,7 @@ CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), w
 
 	CalcPanel* cal = new CalcPanel(this);
 	boxsizer->Add(cal, 1 ,wxEXPAND);
+	boxsizer->Add(image, 1, wxEXPAND);
 	SetSizer(boxsizer);
 	
 }

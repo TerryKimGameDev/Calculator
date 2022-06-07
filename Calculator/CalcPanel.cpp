@@ -21,6 +21,7 @@ CalcPanel::CalcPanel(wxWindow *parent): wxPanel(parent) {
 	numgrid->Add(new wxButton(this, 31, "Hex"), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 32, "Dec"), 0, wxEXPAND);
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	//numgrid->Add(new wxStaticBitmap(this, wxID_ANY, wxBitmap("Minecraft-Characters-PNG.png", wxBITMAP_TYPE_PNG)), 0 , wxEXPAND);
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
 	numgrid->Add(new wxButton(this, 40, "%"), 0, wxEXPAND);
