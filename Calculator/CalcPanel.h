@@ -7,6 +7,7 @@ public:
 	CalcPanel(wxWindow* parent);
 	~CalcPanel();
 public:
+	wxTextCtrl* mtxtCnt = nullptr;
 	wxGridSizer* numgrid = nullptr;
 
 	void onbttnclicked(wxCommandEvent& evt);

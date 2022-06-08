@@ -1,6 +1,7 @@
 #pragma once
 
 #include "wx/wx.h"
+#include "CalcPanel.h"
 class CalcForm : public wxFrame
 {
 public:
@@ -8,7 +9,7 @@ public:
 	~CalcForm();
 
 public:
-	wxTextCtrl *mtxtCnt = nullptr;
+	CalcPanel* cal = nullptr;
 
 	void onbttnclicked(wxCommandEvent &evt);
 	wxDECLARE_EVENT_TABLE();
