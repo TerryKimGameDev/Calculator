@@ -2,8 +2,9 @@
 #include "CalcButton.h"
 
 wxBEGIN_EVENT_TABLE(CalcPanel, wxPanel)
-EVT_BUTTON(21, onbttnclicked)
-
+//EVT_BUTTON(21, onbttnclicked)
+//EVT_BUTTON(41, onbttnclicked)
+EVT_BUTTON(wxID_ANY, CalcPanel::onbttnclicked)
 wxEND_EVENT_TABLE()
 
 using namespace std;
@@ -16,7 +17,6 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
 
 	mtxtCnt = new wxTextCtrl(this, wxID_ANY, wxT(""), wxPoint(-1, -1), wxSize(-1, 40));
-	mtxtCnt->SetFont(font);
 
 	boxsizer->Add(mtxtCnt, 0, wxEXPAND | wxTOP | wxBOTTOM, 4);
 
@@ -26,7 +26,7 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	for (int i = 0; i < 10; i++)
 	{
 		nums[i] = new CalcButton(this, i, to_string(i));
-		nums[i]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &CalcPanel::onbttnclicked, this);
+		//nums[i]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &CalcPanel::onbttnclicked, this);
 	}
 
 	//numgrid->Add(new wxButton(this, 30, "Bin"), 0, wxEXPAND);
@@ -40,7 +40,7 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	numgrid->Add(new CalcButton(this, 40, "%"), 0, wxEXPAND);
 	numgrid->Add(new CalcButton(this, 41, "C"), 0, wxEXPAND);
 	numgrid->Add(new CalcButton(this, 20, "+"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 21, "--"), 0, wxEXPAND);
+	numgrid->Add(new CalcButton(this, 10, "-"), 0, wxEXPAND); // negative number
 	numgrid->Add(new CalcButton(this, 22, "X"), 0, wxEXPAND);
 	numgrid->Add(new CalcButton(this, 23, "/"), 0, wxEXPAND);
 	numgrid->Add(nums[9], 0, wxEXPAND);
@@ -50,7 +50,7 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	numgrid->Add(nums[6], 0, wxEXPAND);
 	numgrid->Add(nums[5], 0, wxEXPAND);
 	numgrid->Add(nums[4], 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 10, "-"), 0, wxEXPAND);
+	numgrid->Add(new CalcButton(this, 21, "--"), 0, wxEXPAND); //minus
 	numgrid->Add(nums[3], 0, wxEXPAND);
 	numgrid->Add(nums[2], 0, wxEXPAND);
 	numgrid->Add(nums[1], 0, wxEXPAND);
@@ -69,30 +69,38 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 {
 	//mLst->AppendString(mtxtCnt->GetValue());
 	//mtxtCnt->AppendText()
-	int eventer = -1;
-	int e = evt.GetId();
-	if (e < 10)
+	int id = evt.GetId();
+	switch (id)
 	{
-		eventer = 0;
-	}
-	else if (e == 21)
+	default:
 	{
-		eventer = 1;
-	}
-	switch (eventer)
-	{
-	case 0:
-	{
-		mtxtCnt->AppendText(to_string(evt.GetId()));
+		mtxtCnt->AppendText(this->FindItem(id)->GetLabel());
 		break;
 	}
-	case 1:
+	case 21:
 	{
-		wxString s = mtxtCnt->GetValue();
-		if (s[0] != '-')
+		if (!mtxtCnt->IsEmpty())
 		{
-			mtxtCnt->SetLabelText("-" + s);
+			wxString s = mtxtCnt->GetValue();
+			if (s[0] != '-')
+			{
+				mtxtCnt->SetLabelText("-" + s);
+			}
+			else
+			{
+				s.erase(remove(s.begin(), s.end(), '-'), s.end());
+				mtxtCnt->SetLabelText(s);
+			}
 		}
+		else
+		{
+			mtxtCnt->AppendText('-');
+		}
+		break;
+	}
+	case 41:
+	{
+		mtxtCnt->Clear();
 		break;
 	}
 	case -1:
