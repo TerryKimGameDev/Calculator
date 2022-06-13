@@ -1,4 +1,5 @@
 #include "CalcPanel.h"
+#include "ButtonFactory.h"
 #include "CalcButton.h"
 
 wxBEGIN_EVENT_TABLE(CalcPanel, wxPanel)
@@ -22,40 +23,70 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 
 	numgrid = new wxGridSizer(6, 4, 5, 5);
 
-	CalcButton* nums[10];
-	for (int i = 0; i < 10; i++)
-	{
-		nums[i] = new CalcButton(this, i, to_string(i));
-		//nums[i]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &CalcPanel::onbttnclicked, this);
-	}
+	//CalcButton* nums[10];
+	//for (int i = 0; i < 10; i++)
+	//{
+	//	nums[i] = new CalcButton(this, i, to_string(i));
+	//	//nums[i]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &CalcPanel::onbttnclicked, this);
+	//}
 
-	//numgrid->Add(new wxButton(this, 30, "Bin"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 30, "Bin"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 31, "Hex"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 32, "Dec"), 0, wxEXPAND);
-	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
-	//numgrid->Add(new wxStaticBitmap(this, wxID_ANY, wxBitmap("Minecraft-Characters-PNG.png", wxBITMAP_TYPE_PNG)), 0 , wxEXPAND);
-	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
-	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 40, "%"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 41, "C"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 20, "+"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 10, "-"), 0, wxEXPAND); // negative number
-	numgrid->Add(new CalcButton(this, 22, "X"), 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 23, "/"), 0, wxEXPAND);
-	numgrid->Add(nums[9], 0, wxEXPAND);
-	numgrid->Add(nums[8], 0, wxEXPAND);
-	numgrid->Add(nums[7], 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 11, "="), 0, wxEXPAND);
-	numgrid->Add(nums[6], 0, wxEXPAND);
-	numgrid->Add(nums[5], 0, wxEXPAND);
-	numgrid->Add(nums[4], 0, wxEXPAND);
-	numgrid->Add(new CalcButton(this, 21, "--"), 0, wxEXPAND); //minus
-	numgrid->Add(nums[3], 0, wxEXPAND);
-	numgrid->Add(nums[2], 0, wxEXPAND);
-	numgrid->Add(nums[1], 0, wxEXPAND);
-	numgrid->Add(nums[0], 0, wxEXPAND);
+	////numgrid->Add(new wxButton(this, 30, "Bin"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 30, "Bin"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 31, "Hex"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 32, "Dec"), 0, wxEXPAND);
+	//numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	////numgrid->Add(new wxStaticBitmap(this, wxID_ANY, wxBitmap("Minecraft-Characters-PNG.png", wxBITMAP_TYPE_PNG)), 0 , wxEXPAND);
+	//numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	//numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 40, "%"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 41, "C"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 20, "+"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 10, "-"), 0, wxEXPAND); // negative number
+	//numgrid->Add(new CalcButton(this, 22, "X"), 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 23, "/"), 0, wxEXPAND);
+	//numgrid->Add(nums[9], 0, wxEXPAND);
+	//numgrid->Add(nums[8], 0, wxEXPAND);
+	//numgrid->Add(nums[7], 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 11, "="), 0, wxEXPAND);
+	//numgrid->Add(nums[6], 0, wxEXPAND);
+	//numgrid->Add(nums[5], 0, wxEXPAND);
+	//numgrid->Add(nums[4], 0, wxEXPAND);
+	//numgrid->Add(new CalcButton(this, 21, "--"), 0, wxEXPAND); //minus
+	//numgrid->Add(nums[3], 0, wxEXPAND);
+	//numgrid->Add(nums[2], 0, wxEXPAND);
+	//numgrid->Add(nums[1], 0, wxEXPAND);
+	//numgrid->Add(nums[0], 0, wxEXPAND);
+	ButtonFactory bf;
+	
+	numgrid->Add(bf.CreateButton(this, "Bin"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "Hex"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "Dec"), 0, wxEXPAND);
 
+	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
+
+	numgrid->Add(bf.CreateButton(this, "%"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "C", 41), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "+"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "-"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "X"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "/"), 0, wxEXPAND);
+
+	numgrid->Add(bf.CreateButton(this, "9"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "8"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "7"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "="), 0, wxEXPAND);
+
+	numgrid->Add(bf.CreateButton(this, "6"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "5"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "4"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "--", 21), 0, wxEXPAND);
+
+	numgrid->Add(bf.CreateButton(this, "3"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "2"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "1"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "0"), 0, wxEXPAND);
 
 	boxsizer->Add(numgrid, 1, wxEXPAND);
 	numgrid->Layout();
