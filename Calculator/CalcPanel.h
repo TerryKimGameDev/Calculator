@@ -1,6 +1,6 @@
 #pragma once
-
 #include "wx/wx.h"
+#include "CalcProcessor.h"
 class CalcPanel : public wxPanel
 {
 public:
@@ -9,6 +9,7 @@ public:
 public:
 	wxTextCtrl* mtxtCnt = nullptr;
 	wxGridSizer* numgrid = nullptr;
+	CalcProcessor* processor = CalcProcessor::GetInstances();
 
 	void onbttnclicked(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();

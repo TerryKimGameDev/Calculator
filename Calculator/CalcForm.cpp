@@ -3,6 +3,7 @@ wxBEGIN_EVENT_TABLE(CalcForm, wxFrame)
 EVT_BUTTON(0, onbttnclicked)
 wxEND_EVENT_TABLE()
 
+
 using namespace std;
 CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), wxSize(300, 400)) {
 
@@ -13,7 +14,6 @@ CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), w
 	logo->Rescale(200,200);
 	wxStaticBitmap* image;
 	image = new wxStaticBitmap(this, wxID_ANY, *logo);*/
-
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
 	
 
