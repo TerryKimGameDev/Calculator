@@ -1,9 +1,6 @@
 #include "CalcButton.h"
 
-wxBEGIN_EVENT_TABLE(CalcButton, wxButton)
-EVT_BUTTON(10001, onbttnclicked)
-wxEND_EVENT_TABLE()
-
+//made just to color buttons
 using namespace std;
 CalcButton::CalcButton(wxWindow* parent, wxWindowID id,const wxString &s) : wxButton(parent, id, s) {
 
@@ -13,11 +10,4 @@ CalcButton::CalcButton(wxWindow* parent, wxWindowID id,const wxString &s) : wxBu
 	this->SetForegroundColour(wxColor(79, 71, 71));
 
 	
-}
-
-void CalcButton::onbttnclicked(wxCommandEvent& evt)
-{
-	//mLst->AppendString(mtxtCnt->GetValue());
-	//mtxtCnt->AppendText()
-	evt.Skip();
 }

@@ -10,8 +10,5 @@ public:
 
 public:
 	CalcPanel* cal = nullptr;
-
-	void onbttnclicked(wxCommandEvent &evt);
-	wxDECLARE_EVENT_TABLE();
 };
 

@@ -3,8 +3,6 @@
 #include "CalcButton.h"
 
 wxBEGIN_EVENT_TABLE(CalcPanel, wxPanel)
-//EVT_BUTTON(21, onbttnclicked)
-//EVT_BUTTON(41, onbttnclicked)
 EVT_BUTTON(wxID_ANY, CalcPanel::onbttnclicked)
 wxEND_EVENT_TABLE()
 
@@ -17,9 +15,9 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 
 	wxBoxSizer* boxsizer = new wxBoxSizer(wxVERTICAL);
 
-	mtxtCnt = new wxTextCtrl(this, wxID_ANY, wxT(""), wxPoint(-1, -1), wxSize(-1, 40));
+	mtxtCnt = new wxTextCtrl(this, wxID_ANY, wxT(""));
 
-	boxsizer->Add(mtxtCnt, 0, wxEXPAND | wxTOP | wxBOTTOM, 4);
+	boxsizer->Add(mtxtCnt, 0, wxEXPAND | wxTOP | wxBOTTOM, 4); //note to self this resizes elements that you give it.
 
 	numgrid = new wxGridSizer(6, 4, 5, 5);
 	ButtonFactory bf;
@@ -55,7 +53,7 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	numgrid->Add(bf.CreateButton(this, "0"), 0, wxEXPAND);
 
 	boxsizer->Add(numgrid, 1, wxEXPAND);
-	numgrid->Layout();
+
 	SetSizer(boxsizer);
 }
 
@@ -64,7 +62,7 @@ CalcPanel::~CalcPanel() {
 
 void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 {
-	//CalcButton* pButton = dynamic_cast<CalcButton*>(evt.GetEventObject());
+	//CalcButton* pButton = dynamic_cast<CalcButton*>(evt.GetEventObject()); //the other way
 	int id = evt.GetId();
 	switch (id)
 	{

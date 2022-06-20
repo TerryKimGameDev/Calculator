@@ -1,7 +1,4 @@
 #include "CalcForm.h"
-wxBEGIN_EVENT_TABLE(CalcForm, wxFrame)
-EVT_BUTTON(0, onbttnclicked)
-wxEND_EVENT_TABLE()
 
 
 using namespace std;
@@ -25,12 +22,4 @@ CalcForm::CalcForm() : wxFrame(nullptr, wxID_ANY, "Widgets!", wxPoint(30, 30), w
 }
 
 CalcForm::~CalcForm() {
-}
-
-void CalcForm::onbttnclicked(wxCommandEvent& evt)
-{
-	//mLst->AppendString(mtxtCnt->GetValue());
-	
-	
-	evt.Skip();
 }
