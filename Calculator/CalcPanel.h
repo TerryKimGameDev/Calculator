@@ -11,6 +11,8 @@ public:
 	wxGridSizer* numgrid = nullptr;
 	CalcProcessor* processor = CalcProcessor::GetInstances();
 
+
+
 	void onbttnclicked(wxCommandEvent& evt);
 	wxDECLARE_EVENT_TABLE();
 

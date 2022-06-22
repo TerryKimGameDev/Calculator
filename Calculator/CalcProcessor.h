@@ -8,7 +8,7 @@ class CalcProcessor
 {
 private:
 	static CalcProcessor*_processor;
-	
+	int baseNumber;
 	CalcProcessor() {}
 public:
 	static CalcProcessor* GetInstances();
@@ -23,5 +23,13 @@ public:
 	int Subtraction(int x,int y);
 	int Multiplication(int x, int y);
 	int Division(int x, int y);
+
+	void setBaseNumber(int number);
+
+	string GetDecimal();
+	string GetHexadecimal();
+
+
+	string GetBinary();
 };
 

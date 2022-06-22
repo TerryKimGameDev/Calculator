@@ -22,9 +22,9 @@ CalcPanel::CalcPanel(wxWindow* parent) : wxPanel(parent) {
 	numgrid = new wxGridSizer(6, 4, 5, 5);
 	ButtonFactory bf;
 	
-	numgrid->Add(bf.CreateButton(this, "Bin"), 0, wxEXPAND);
-	numgrid->Add(bf.CreateButton(this, "Hex"), 0, wxEXPAND);
-	numgrid->Add(bf.CreateButton(this, "Dec"), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "Bin", 800), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "Hex", 801), 0, wxEXPAND);
+	numgrid->Add(bf.CreateButton(this, "Dec", 802), 0, wxEXPAND);
 
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
 	numgrid->Add(new wxStaticText(this, wxID_ANY, ""), 0, wxEXPAND);
@@ -76,19 +76,21 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 		if (!mtxtCnt->IsEmpty())
 		{
 			wxString s = mtxtCnt->GetValue();
-			if (s[0] != '-')
+			if (s[0] != '(')
 			{
-				mtxtCnt->SetLabelText("-" + s);
+				mtxtCnt->SetLabelText("(~" + s+")");
 			}
 			else
 			{
-				s.erase(remove(s.begin(), s.end(), '-'), s.end());
+				s.erase(remove(s.begin(), s.end(), '('), s.end());
+				s.erase(remove(s.begin(), s.end(), '~'), s.end());
+				s.erase(remove(s.begin(), s.end(), ')'), s.end());
 				mtxtCnt->SetLabelText(s);
 			}
 		}
 		else
 		{
-			mtxtCnt->AppendText('-');
+			mtxtCnt->AppendText('~');
 		}
 		break;
 	}
@@ -100,6 +102,27 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 	case 200:
 	{
 		mtxtCnt->SetLabel(processor->GiveOutput(mtxtCnt->GetValue()));
+		break;
+	}
+	case 800:
+	{
+		string s(mtxtCnt->GetValue().c_str());
+		processor->setBaseNumber(stoi(s));
+		mtxtCnt->SetLabel(processor->GetBinary());
+		break;
+	}
+	case 801:
+	{
+		string s(mtxtCnt->GetValue().c_str());
+		processor->setBaseNumber(stoi(s));
+		mtxtCnt->SetLabel(processor->GetHexadecimal());
+		break;
+	}
+	case 802:
+	{
+		string s(mtxtCnt->GetValue().c_str());
+		processor->setBaseNumber(stoi(s));
+		mtxtCnt->SetLabel(processor->GetDecimal());
 		break;
 	}
 	case -1:
