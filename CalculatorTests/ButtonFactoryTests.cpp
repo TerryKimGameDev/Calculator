@@ -31,12 +31,12 @@ namespace ButtonFactoryTest
 
 		TEST_METHOD(TestMatchingLabel)
 		{
-			Assert::AreEqual(temp->GetstrLabel(), std::string("Pringles")); //weird does not return... but this works in the calculator?
+			Assert::AreEqual(std::string(temp->GetLabel()), std::string("Pringles")); //weird does not return... but this works in the calculator?
 		}
 
 		TEST_METHOD(TestNotMatchingLabel)
 		{
-			Assert::AreNotEqual(temp->GetstrLabel(), std::string("Doritos")); //sorry was hungry for chips
+			Assert::AreNotEqual(std::string(temp->GetLabel()), std::string("Doritos")); //sorry was hungry for chips
 		}
 
 		TEST_METHOD(ButtonExists)
@@ -61,12 +61,12 @@ namespace ButtonFactoryTest
 
 		TEST_METHOD(ButtonTWoLabelTest)
 		{
-			Assert::AreEqual(temp2->GetstrLabel(), std::string("Shuffle"));
+			Assert::AreEqual(std::string(temp2->GetLabel()), std::string("Shuffle"));
 		}
 
 		TEST_METHOD(ButtonTwoLabelNotMatching)
 		{
-			Assert::AreNotEqual(temp2->GetstrLabel(), std::string("IP"));
+			Assert::AreNotEqual(std::string(temp2->GetLabel()), std::string("IP"));
 		}
 
 		TEST_METHOD(ButtonsAreNotsameID)
@@ -78,7 +78,7 @@ namespace ButtonFactoryTest
 		TEST_METHOD(ButtonsAreNotsameLabel)
 		{
 
-			Assert::AreNotEqual(temp->GetstrLabel(), temp2->GetstrLabel());
+			Assert::AreNotEqual(std::string(temp->GetLabel()), std::string(temp2->GetLabel()));
 		}
 
 

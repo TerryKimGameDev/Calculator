@@ -7,7 +7,5 @@ private:
 	std::string label;
 public:
 	CalcButton(wxWindow* parent, wxWindowID id, const wxString &s);
-
-	std::string GetstrLabel();
 };
 
