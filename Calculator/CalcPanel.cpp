@@ -64,11 +64,13 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 {
 	//CalcButton* pButton = dynamic_cast<CalcButton*>(evt.GetEventObject()); //the other way
 	int id = evt.GetId();
+
 	switch (id)
 	{
 	default:
 	{
 		mtxtCnt->AppendText(this->FindItem(id)->GetLabel());
+		processor->setBaseNumber(wxAtoi(mtxtCnt->GetValue()));
 		break;
 	}
 	case 21:
@@ -87,10 +89,7 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 				s.erase(remove(s.begin(), s.end(), ')'), s.end());
 				mtxtCnt->SetLabelText(s);
 			}
-		}
-		else
-		{
-			mtxtCnt->AppendText('~');
+			processor->setBaseNumber(wxAtoi(s)*-1);
 		}
 		break;
 	}
@@ -102,26 +101,21 @@ void CalcPanel::onbttnclicked(wxCommandEvent& evt)
 	case 200:
 	{
 		mtxtCnt->SetLabel(processor->GiveOutput(mtxtCnt->GetValue()));
+		processor->setBaseNumber(wxAtoi(mtxtCnt->GetValue()));
 		break;
 	}
 	case 800:
-	{
-		string s(mtxtCnt->GetValue().c_str());
-		processor->setBaseNumber(stoi(s));
+	{		
 		mtxtCnt->SetLabel(processor->GetBinary());
 		break;
 	}
 	case 801:
-	{
-		string s(mtxtCnt->GetValue().c_str());
-		processor->setBaseNumber(stoi(s));
+	{		
 		mtxtCnt->SetLabel(processor->GetHexadecimal());
 		break;
 	}
 	case 802:
 	{
-		string s(mtxtCnt->GetValue().c_str());
-		processor->setBaseNumber(stoi(s));
 		mtxtCnt->SetLabel(processor->GetDecimal());
 		break;
 	}

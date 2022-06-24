@@ -67,6 +67,23 @@ public:
 	}
 
 };
+struct ModuloCommand : public IBaseCommand
+{
+private:
+	CalcProcessor* _proc = nullptr;
+	int _x = 0;
+	int _y = 0;
+public:
+	ModuloCommand(CalcProcessor* proc, int x, int y) {
+		_proc = proc;
+		_x = x;
+		_y = y;
+	}
+	void Execute() {
+		_proc->setBaseNumber(_proc->Modulo(_x, _y));
+	}
+
+};
 CalcProcessor* CalcProcessor::_processor = nullptr;
 
 CalcProcessor* CalcProcessor::GetInstances() {
@@ -85,8 +102,8 @@ wxString CalcProcessor::GiveOutput(wxString input) {
 								// cause you will forget
 	vector<int> nums;
 	vector<string> signs;
-	string deli = "+-X/"; //what you are checking for
-	string negative = "(~)";
+	string deli = "+-X/%"; //what you are checking for
+	string negative = "(~)"; //just my own special way of negation... felt nicer to me surronding a number with ()
 	int pos = 0;
 	int pos2 = 0;
 	while ((pos = c.find_first_of(deli)) != string::npos) {
@@ -110,13 +127,20 @@ wxString CalcProcessor::GiveOutput(wxString input) {
 			c.erase(0, pos + 1);
 		}
 	}
-	nums.push_back(stoi(c));
+	if (!c.empty() && c[0] != '(')
+	{
+		nums.push_back(stoi(c));
+	}
+	else
+	{
+		return input;
+	}
 
-	int result = NULL;
+	int result = nums[0];
 	vector<IBaseCommand*> commands;
 	if (nums.size() > 0)
 	{
-		if (nums.size() > 1) //if you are wondering why it looks like this the original code was suppose to be able to work with more than two number inputs
+		if (nums.size() > 1) //if you/I are wondering why it looks like this the original code was suppose to be able to work with more than two number inputs
 							//and I did not feel like reworking all of the code for only two inputs
 		{
 			for (size_t i = 0; i < signs.size(); i++)
@@ -140,6 +164,11 @@ wxString CalcProcessor::GiveOutput(wxString input) {
 				{
 					MultiplicationCommand mult(this, nums[i], nums[i + 1]);
 					commands.push_back(&mult);
+				}
+				else if (signs[i] == "%")
+				{
+					ModuloCommand mod(this, nums[i], nums[i + 1]);
+					commands.push_back(&mod);
 				}
 			}
 			for (size_t i = 0; i < commands.size(); i++)
@@ -174,11 +203,19 @@ int CalcProcessor::Division(int x, int y) {
 	return x / y;
 }
 
+int CalcProcessor::Modulo(int x, int y) {
+	return x % y;
+}
 void CalcProcessor::setBaseNumber(int number) {
 	baseNumber = number;
 }
 
 string CalcProcessor::GetDecimal() {
+	if (baseNumber < 0)
+	{
+		return "(~" + to_string(baseNumber*-1) + ")";
+	}
+	else
 	return to_string(baseNumber);
 }
 
